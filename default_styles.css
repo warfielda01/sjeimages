@@ -1,0 +1,155 @@
+/* ==========================================================================
+   SJE NOWRA MASTER DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* --- Permanent Brand Assets (Do not change across themes) --- */
+  --sje-brand-black: #070b07;       /* PANTONE Process Black C */
+  --sje-brand-dark-blue: #003a70;   /* PANTONE 654 C           */
+  --sje-brand-light-blue: #94c0e9;  /* PANTONE 283 C           */
+  --sje-brand-yellow: #ffc843;      /* PANTONE 1225 C          */
+
+  /* --- Secondary Harmonies & Accents --- */
+  --sje-analog-teal: #006070;    
+  --sje-triadic-red: #70003a;           /* Form/Error validation */
+  --sje-triadic-green: #3a7000;         /* Success messages */
+
+  /* --- Typography --- */
+  --sje-font-family: "Arial", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ==========================================================================
+   THEME DEFINITIONS (Semantic Variables)
+   ========================================================================== */
+
+/* --- 1. DEFAULT LIGHT THEME --- */
+:root, [data-theme="light"] {
+  --sje-bg-main: #ffffff;
+  --sje-bg-surface: #f4f5f4;        /* Cards, wells, subtle stripes */
+  --sje-bg-inverse: #070b07;
+  
+  --sje-text-main: #070b07;         /* SJE Black */
+  --sje-text-muted: #606560;
+  --sje-text-inverse: #ffffff;
+  
+  --sje-border: #dcdedc;
+  
+  /* Primary Action Roles */
+  --sje-action-primary: var(--sje-brand-dark-blue);
+  --sje-action-primary-hover: var(--sje-analog-teal);
+  --sje-action-accent: var(--sje-brand-yellow);
+  --sje-action-accent-text: var(--sje-brand-black);
+}
+
+/* --- 2. DARK THEME DEFINITION --- */
+/* This kicks in if the user prefers dark mode on their OS OR if your script forces [data-theme="dark"] */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sje-bg-main: #0b0f0b;          /* Deep rich background based on SJE Black */
+    --sje-bg-surface: #151b15;       /* Lighter layer for UI cards */
+    --sje-bg-inverse: #ffffff;
+    
+    --sje-text-main: #f4f5f4;        /* Off-white readable text */
+    --sje-text-muted: #9ba09b;
+    --sje-text-inverse: #070b07;
+    
+    --sje-border: #242b24;
+    
+    /* Swap actions to preserve contrast & brand presence in the dark */
+    --sje-action-primary: var(--sje-brand-light-blue);
+    --sje-action-primary-hover: #b3d5f5;
+    --sje-action-accent: var(--sje-brand-yellow);
+    --sje-action-accent-text: var(--sje-brand-black);
+  }
+}
+
+/* Explicit override attribute if you add a dark mode toggle button later */
+[data-theme="dark"] {
+  --sje-bg-main: #0b0f0b;
+  --sje-bg-surface: #151b15;
+  --sje-bg-inverse: #ffffff;
+  
+  --sje-text-main: #f4f5f4;
+  --sje-text-muted: #9ba09b;
+  --sje-text-inverse: #070b07;
+  
+  --sje-border: #242b24;
+  
+  --sje-action-primary: var(--sje-brand-light-blue);
+  --sje-action-primary-hover: #b3d5f5;
+  --sje-action-accent: var(--sje-brand-yellow);
+  --sje-action-accent-text: var(--sje-brand-black);
+}
+
+/* ==========================================================================
+   GLOBAL STYLES (Using Semantic Variables)
+   ========================================================================== */
+
+body {
+  font-family: var(--sje-font-family);
+  color: var(--sje-text-main);
+  background-color: var(--sje-bg-main);
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth shifting */
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-weight: 700; /* Arial Bold */
+  /* Keep titles dark blue in light theme, but let them turn bright/readable in dark theme */
+  color: var(--sje-action-primary); 
+}
+
+/* ==========================================================================
+   ADAPTIVE UI COMPONENTS
+   ========================================================================== */
+
+/* Adaptive Card Component */
+.sje-card {
+  background-color: var(--sje-bg-surface);
+  border: 1px solid var(--sje-border);
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+/* Adaptive Primary Button */
+.sje-btn-primary {
+  font-family: var(--sje-font-family);
+  font-weight: 700;
+  background-color: var(--sje-action-primary);
+  color: var(--sje-text-inverse);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.sje-btn-primary:hover {
+  background-color: var(--sje-action-primary-hover);
+}
+
+/* Accent Button (Always stands out using Yellow) */
+.sje-btn-accent {
+  font-family: var(--sje-font-family);
+  font-weight: 700;
+  background-color: var(--sje-action-accent);
+  color: var(--sje-action-accent-text);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sje-btn-accent:hover {
+  filter: brightness(1.1);
+}
+
+/* Form Inputs (Crucial for Dark Mode) */
+.sje-input {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: var(--sje-bg-main);
+  color: var(--sje-text-main);
+  border: 1px solid var(--sje-border);
+  border-radius: 4px;
+}
